@@ -19,8 +19,9 @@ Your algorithm should have a linear runtime complexity. Could you implement it w
 """
 
 from collections import Counter
-# Time: O(n); space: O(n)
+
 class Solution:
+    # Time: O(n); space: O(n)
     def singleNumber(self, nums) -> int:
         counter = Counter()
         for val in nums:
@@ -29,7 +30,15 @@ class Solution:
         for val in counter:
             if counter[val] == 1:
                 return val
-        
+    # Time: O(n); space: O(1)        
+    def singleNumber(self, nums):
+        el = nums[0]
+        # x xor x = 0 (if values are the same, xor gives zero)
+        for i in range(1, len(nums)):
+            el = el ^ nums[i]
+        return el
+            
+
 sol = Solution()
 # Test 1
 nums = [2,2,1]
