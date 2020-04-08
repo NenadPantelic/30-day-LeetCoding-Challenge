@@ -51,6 +51,7 @@ class Solution:
         for val in counter:
             # if x + 1 is in array
             if (val + 1) in counter:
+                # update count with num of occurences of val
                 totalCount += counter[val]
         return totalCount
              
