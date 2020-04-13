@@ -37,11 +37,11 @@ class Solution:
             if cumsum == 0:
                 maxLen = max(maxLen, i+1)
             else:
-                # if cumsum not in map - add it
+                # if cumsum is not in map - add it
                 if cumsum not in cumsumPositionsMap:
                     cumsumPositionsMap[cumsum] = i
-                # else - if sum repeated - we have a case where subarray at slice (i,j] or [i,j)
-                # is array of equal number of zeros and ones
+                # else - if cumsum repeated - we have a case where subarray at slice (i,j] or [i,j)
+                # is array of equal number of zeros and ones, so update maxLen if this subarr is longest so far
                 else:
                     length = i - cumsumPositionsMap[cumsum]
                     maxLen = max(maxLen, length)
