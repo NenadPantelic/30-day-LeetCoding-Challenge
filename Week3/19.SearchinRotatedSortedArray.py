@@ -108,29 +108,19 @@ print(sol.search(nums, 6))
 
 # Another very elegant solution
 class Solution(object):
-    def search(self, nums, target):
-        def binSearch (nums, l, r, value): 
-            if l > r: 
+    def search(self, nums, target: int) -> int:
+        def binSearch(l,r):
+            if l > r:
                 return -1
-      
-            mid = (l + r) // 2
-            # we find the element
-            if nums[mid] == value: 
-                return mid 
-            # left subarray is not rotated - good order
-            if nums[l] < nums[mid]: 
-                # element is in left subarray
-                if value >= nums[l] and value < nums[mid]: 
-                    return binSearch(nums, l, mid-1, value) 
-                # check rgiht subarray
-                return binSearch(nums, mid+1, r, value) 
-            # else -> element is in right subarray 
-            if value > nums[mid] and value <= nums[r]: 
-                return binSearch(nums, mid+1, r, value)
-            # check left subarray
-            return binSearch(nums, l, mid-1, value) 
-        
-        return binSearch (nums,0,len(nums)-1,target)
+            m = (r+l)//2
+            if nums[m] == target:
+                return m
+             # follow left half if left is sorted and target is in its range or right is sorted but target not in its range
+            if nums[l] <= target < nums[m] or (nums[m] <= nums[r]  and not nums[m] < target <= nums[r]):
+                return binSearch(l,m-1)
+            else: 
+                return binSearch(m+1, r)
+        return binSearch(0,len(nums)-1)
         
 sol = Solution()
 # Test 1
