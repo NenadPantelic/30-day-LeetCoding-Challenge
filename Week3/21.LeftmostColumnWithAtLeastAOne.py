@@ -78,7 +78,7 @@ mat[i] is sorted in a non-decreasing way.
 # Algorithm:
 # 1. Start at the top right corner - 0th row, m-1th column
 # 2. examine values:
-# a) if value == 1 -> go left, set the flag for found 1 (for case where there is no 1 in matrix), and set the 
+# a) if value == 1 -> go left, and set the 
 # lastOneCol to value of current col -> to know what is the last column where we found 1
 # b) if value == 0 -> go down examine the same column but the next row
 # 3. repeat second step until we go out of the matrix
@@ -89,24 +89,18 @@ class Solution:
         n, m = binaryMatrix.dimensions()
         row = 0
         col = m-1
-        # last column where we found 1
-        lastOneCol = col
-        # flag that says if we found 1 at all
-        oneFound = False
-        while 0 <= row < n and 0 <= col < m:
+        # last column where we found 1, default case is -1
+        lastOneCol = -1
+        while 0 <= row < n and col >= 0:
             #value = binaryMatrix[row][col] 
             value = binaryMatrix.get(row, col)
-            # one found - update lastOneCol, go left and set oneFound to True
+            # one found - update lastOneCol, go left
             if value == 1:
                 lastOneCol = col
                 col -= 1
-                oneFound = True
             # zero found - go down    
             else:
                 row += 1
-        # one is not found - return -1
-        if not oneFound:
-            return -1
         # return last column where we met 1
         return lastOneCol
     
